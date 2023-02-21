@@ -1,4 +1,3 @@
-
 #'@title usa una matriz binaria de individuos en columnas y marcadores en filas y  
 #' hace agrupamiento jerarquico y analisis de componentes principales
 #'
@@ -63,7 +62,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
   # graficar aportaciones de los de los componentes principales
   # (factoextra: version 1.0.7)
 
-  jpeg(paste(ruta,"PCA_aportaciones.jpeg", sep = ""),
+  tiff(paste(ruta,"PCA_aportaciones.tiff", sep = ""),
        res = 300,
        width = 2000,
        height = 2000)
@@ -80,7 +79,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
    # visualizar los compomentes principales individuales
    # cos2 = the quality of the individuals on the factor map
 
-   jpeg(paste(ruta,"PCA.jpeg", sep = ""),
+   tiff(paste(ruta,"PCA.tiff", sep = ""),
         res = 300,
         width = 2000,
         height = 2000)
@@ -101,7 +100,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
                      iseed = TRUE)
 
    # visualizar el dendograma con titulo, entre otras
-   jpeg(paste(ruta, "Dendrograma.jpeg", sep = ""), res = 300,
+   tiff(paste(ruta, "Dendrograma.tiff", sep = ""), res = 300,
         width = 2000,
         height = 2000)
 
@@ -116,7 +115,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
 
    dev.off()
 
-  jpeg(paste(ruta, "correlacion.jpeg", sep = ""), res = 300,
+  tiff(paste(ruta, "correlacion.tiff", sep = ""), res = 300,
        width = 2000,
        height = 2000)
 
@@ -351,7 +350,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
   for(i in 1:length(Best_dendros)){
 
     # visualizacion  mas común en rectangulos
-    jpeg(paste(ruta, paste(especie, "_", names(mejores_agrupamientos)[i]), ".jpeg", sep = ""),
+    tiff(paste(ruta, paste(especie, "_", names(mejores_agrupamientos)[i]), ".tiff", sep = ""),
          res = 300,
          width = 2000,
          height = 2000)
@@ -371,7 +370,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
     dev.off()
 
     # visualizacion  mas común en rectangulos
-    jpeg(paste(ruta, paste(especie, "_",names(mejores_agrupamientos)[i]), "_horizontal.jpeg", sep = ""),
+    tiff(paste(ruta, paste(especie, "_",names(mejores_agrupamientos)[i]), "_horizontal.tiff", sep = ""),
          res = 300,
          width = 2000,
          height = 2000)
