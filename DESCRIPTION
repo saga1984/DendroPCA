@@ -1,0 +1,32 @@
+Package: DendroPCA
+Title: Hace analisis de PCA y agrupamiento jerarquico evalucion de marcadores por PIC y H y
+  devuelve imagenes de calidad de publicacion
+Version: 1.1.1.1
+Author: Santiago-Valentin-Galvan-Gordillo <galvangosv@gmail.com>
+Description: Hace analisis por componentes principales y obtiene grafico de calidad de publicacion.
+  Hace dendrograma con soporte estadistico y obtiene grafico de calidad de publicacion.
+  A partir de todos (10) los metodos de ade4 para obtener matrices de distancia
+  y a partir de todos (8) los metodos de agrupamiento jerarquico
+  obtiene todas las combinaciones y obtiene sus indices cofeneticos
+  para evaluar los mejores.
+  Contruye dendrogramas para las 4 mejores combinaciones y obtiene grafico de calidad de publicacion.
+  Devuelve Archivos formato CSV de valores de PIC (con interpretacion) y H y un
+  archivo formato CSV de valores cofeneticos para 80 combinaciones de matrices de distancia y 
+  metodos de agrupaiento.
+License: GPL-3
+Imports: 
+    readxl,
+    factoextra,
+    pvclust,
+    corrplot,
+    factoextra,
+    ade4,
+    NbClust,
+    stringr,
+    readr,
+    dplyr,
+    polysat
+Depends: R (>=  4.2.2)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
