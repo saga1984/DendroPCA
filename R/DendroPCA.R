@@ -115,7 +115,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
 
    dev.off()
 
-  tiff(paste(ruta, "correlacion.tiff", sep = ""), res = 300,
+  tiff(paste(ruta, "Correlation.tiff", sep = ""), res = 300,
        width = 2000,
        height = 2000)
 
