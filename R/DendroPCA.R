@@ -392,7 +392,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
   }
   
   
-  ######## calculo de Heterogenicidad de forma manual y del PIC usando polysat ########
+  ######## calculo de Heterocigocidad de forma manual y del PIC usando polysat ########
   
   # contar numero de individuos con cada marcador
   matriz$Conteo <- rowSums(matriz)
