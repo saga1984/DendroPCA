@@ -1,23 +1,23 @@
-#'@title usa una matriz binaria de individuos en columnas y marcadores en filas y  
+#'@title usa una matriz binaria de individuos en columnas y marcadores en filas y
 #' hace agrupamiento jerarquico y analisis de componentes principales
 #'
 #'@description carga el archivo de excel (matriz binaria) y realiza lo siguiente
 #' hace analisis por componentes principales y obtiene grafico de calidad de publicacion.
 #'
 #' hace dendrograma con soporte estadistico y obtiene grafico de calidad de publicacion.
-#' 
+#'
 #' a partir de todos (10) los metodos de ade4 para obtener matrices de distancia
 #' y a partir de todos (8) los metodos de agrupamiento jerarquico
 #' obtiene todas las combinaciones y obtiene sus indices cofeneticos
 #' para evaluar los mejores.
-#' 
+#'
 #' contruye dendrogramas para las 4 mejores combinaciones y obtiene grafico de calidad de publicacion.
 #'
 #' archivos formato CSV de valores de PIC (con interpretacion) y H
-#' 
-#' archivo formato CSV de valores cofeneticos para 80 combinaciones de matrices de distancia y 
+#'
+#' archivo formato CSV de valores cofeneticos para 80 combinaciones de matrices de distancia y
 #' metodos de agrupaiento
-#'  
+#'
 #'@param ruta es la ruta del archivo de entrada (matriz binaria)
 #'@param archivo archivo de entrada (matriz binaria)
 #'@param especie especie de interes de donde vienen los datos
@@ -26,7 +26,7 @@
 #' calculos de PIC y H y lista de indices cofeneticos
 #'@export
 
-Dendro_PCA <- function(ruta, archivo, especie){
+Dendro_y_PCA <- function(ruta, archivo, especie){
 
   # importar hoja de excel
   matriz <- read_xlsx(
@@ -59,6 +59,60 @@ Dendro_PCA <- function(ruta, archivo, especie){
   # obtener eigen valores
   get_eig(res.pca)
 
+  # cos2 total de variables en Dim.1 and Dim.2
+  tiff(paste(ruta,"Total_cos2_var.tiff", sep = ""),
+       res = 350,
+       width = 3000,
+       height = 2500)
+
+  print(fviz_cos2(res.pca, choice = "var", axes = 1:2, xtickslab.rt = 90))
+  dev.off()
+
+  # cos2 total de individuos en Dim.1 and Dim.2
+  tiff(paste(ruta,"Total_cos2_ind.tiff", sep = ""),
+       res = 300,
+       width = 2000,
+       height = 2000)
+
+  print(fviz_cos2(res.pca, choice = "ind", axes = 1:2, xtickslab.rt = 90))
+  dev.off()
+
+  # contribuciones total de variables en Dim.1 and Dim.2
+  tiff(paste(ruta,"Total_contrib_var.tiff", sep = ""),
+       res = 350,
+       width = 3000,
+       height = 2500)
+
+  print(fviz_contrib(res.pca, choice = "var", axes = 1:2, xtickslab.rt = 90))
+  dev.off()
+
+  # cos2 total de individuos en Dim.1 and Dim.2
+  tiff(paste(ruta,"Total_contrib_ind.tiff", sep = ""),
+       res = 300,
+       width = 2000,
+       height = 2000)
+
+  print(fviz_contrib(res.pca, choice = "ind", axes = 1:2, xtickslab.rt = 90))
+  dev.off()
+
+  # cos2 de individuos en todas las dimensiones
+  tiff(paste(ruta,"Cos2_ind.tiff", sep = ""),
+       res = 300,
+       width = 2000,
+       height = 2000)
+
+  corrplot(res.pca$ind$cos2, is.corr = FALSE)
+  dev.off()
+
+  # contribuciones de individuos en todas las dimensiones
+  tiff(paste(ruta,"Contrib_ind.tiff", sep = ""),
+       res = 300,
+       width = 2000,
+       height = 2000)
+
+  corrplot(res.pca$ind$contrib, is.corr = FALSE)
+  dev.off()
+
   # graficar aportaciones de los de los componentes principales
   tiff(paste(ruta,"PCA_aportaciones.tiff", sep = ""),
        res = 300,
@@ -66,59 +120,54 @@ Dendro_PCA <- function(ruta, archivo, especie){
        height = 2000)
 
   print(fviz_screeplot(res.pca,
-                 addlabels = TRUE,
-                 ylim = c(0, 50))
+                       addlabels = TRUE,
+                       ylim = c(0, 50))
   )
   dev.off()
 
-  # crear objeto de PCA individuales
-  varpca <- get_pca_ind(res.pca)
+  # visualizar los compomentes principales individuales
+  # cos2 = the quality of the individuals on the factor map
 
-   # visualizar los compomentes principales individuales
-   # cos2 = the quality of the individuals on the factor map
-
-   tiff(paste(ruta,"PCA.tiff", sep = ""),
-        res = 300,
-        width = 2000,
-        height = 2000)
-
-   print(fviz_pca_ind(res.pca,
-                col.ind = "cos2",
-                gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
-                repel = TRUE,
-                title = paste("PCA individuales /", especie))
-   )
-   dev.off()
-
-  ####### dendograma con bootstrap, 1000, paquete pvclust, version 2.2-0 ########
-   dendro <- pvclust(matriz,
-                     method.hclust = "average", # UPGMA
-                     method.dist = "binary",
-                     nboot = 1000,
-                     iseed = TRUE)
-
-   # visualizar el dendograma con titulo, entre otras
-   tiff(paste(ruta, "Dendrograma.tiff", sep = ""), res = 300,
-        width = 2000,
-        height = 2000)
-
-   plot(dendro,
-        hang = -2,
-        cex = 0.8,
-        main = paste(especie, "binary / UPGMA"))
-
-   # marcar grupos con P mayor a 0.9
-   pvrect(dendro, alpha = 0.95)
-
-   dev.off()
-
-  tiff(paste(ruta, "Correlation.tiff", sep = ""), res = 300,
+  tiff(paste(ruta,"PCA.tiff", sep = ""),
+       res = 300,
        width = 2000,
        height = 2000)
 
-  # grafica de correlacion
-  corrplot(cor(matriz), type = "upper", method = "ellipse", tl.cex = 0.9)
+  print(fviz_pca_ind(res.pca,
+                     col.ind = "cos2",
+                     gradient.cols = c("#00AFBB", "#E7B800", "#FC4E07"),
+                     repel = TRUE,
+                     title = paste("PCA individuales /", especie))
+  )
+  dev.off()
 
+  ####### dendograma con bootstrap, 1000, paquete pvclust, version 2.2-0 ########
+  dendro <- pvclust(matriz,
+                    method.hclust = "average", # UPGMA
+                    method.dist = "binary",
+                    nboot = 1000,
+                    iseed = TRUE)
+
+  # visualizar el dendograma con titulo, entre otras
+  tiff(paste(ruta, "Dendrograma.tiff", sep = ""), res = 300,
+       width = 2000,
+       height = 2000)
+
+  plot(dendro,
+       hang = -2,
+       cex = 0.8,
+       main = paste(especie, "binary / UPGMA"))
+
+
+  # marcar grupos con P mayor a 0.95
+  pvrect(dendro, alpha = 0.95)
+  dev.off()
+
+  tiff(paste(ruta, "Correlacion.tiff", sep = ""), res = 300,
+       width = 2000,
+       height = 2000)
+
+  corrplot(cor(matriz), type = "upper", method = "ellipse", tl.cex = 0.9)
   dev.off()
 
   #######  indices de distancia para datos binarios paquete: adegenet #######
@@ -364,7 +413,6 @@ Dendro_PCA <- function(ruta, archivo, especie){
       )
     )
     )
-
     dev.off()
 
     # visualizacion  mas común en rectangulos
@@ -386,17 +434,16 @@ Dendro_PCA <- function(ruta, archivo, especie){
       )
     )
     )
-
     dev.off()
 
   }
-  
-  
+
+
   ######## calculo de Heterocigocidad de forma manual y del PIC usando polysat ########
-  
+
   # contar numero de individuos con cada marcador
   matriz$Conteo <- rowSums(matriz)
-  
+
   # obtener lista de locus
   locs <- character()
   for(i in 2:nrow(matriz)){
@@ -406,29 +453,29 @@ Dendro_PCA <- function(ruta, archivo, especie){
               ))
     )
   }
-  
+
   # valoes uincos de locus
   locs_unicos <- unique(locs)
-  
+
   # crear y poblar una lista de dataframes correspondientes a los diferentes locus encontrados en la matriz
   locs_lista <- list()
   for(i in 1:length(locs_unicos)){
     locs_lista[[i]] <- matriz[grepl(paste(locs_unicos[i], "_", sep = ""), row.names(matriz)),]
   }
-  
+
   # asignar nombres a lista de locs (dataframes separados por locus)
   for(i in 1:length(locs_unicos)){
     names(locs_lista)[i] <- locs_unicos[i]
   }
-  
+
   # crear columnas necesarias para calculos
   for(i in 1:length(locs_unicos)){
     locs_lista[[i]]$Frecuencia <- locs_lista[[i]]$Conteo / ncol(matriz[grepl("IND",colnames(matriz))])
     locs_lista[[i]]$Corregida <- locs_lista[[i]]$Frecuencia/sum(locs_lista[[i]]$Frecuencia)
     locs_lista[[i]]$Cuadrada <-  locs_lista[[i]]$Corregida^2
   }
-  
-  # crear vector vacio para guardar valores de heterogenicidad
+
+  # crear vector vacio para guardar valores de heterocigocidad
   H_calc <- character()
   # sumar columna de frecuencias al cuadrado
   for(i in 1:length(locs_unicos)){
@@ -441,98 +488,97 @@ Dendro_PCA <- function(ruta, archivo, especie){
                  )
     )
   }
-  
+
   # volver global
   locs_lista <<- locs_lista
-  
+
   # separar en dos columnas
   H_calc <- str_split_fixed(H_calc, " = ", 2)
-  
+
   # convertir control en data frame
   H_calc <- as.data.frame(H_calc)
-  
+
   # coercionar segunda columna de character a double
   H_calc[, 2] <- as.double(H_calc[, 2])
-  
+
   # remover espacios en blanco
   H_calc <- as.data.frame(lapply(H_calc, trimws))
-  
+
   # asignar nombres de columnas
-  colnames(H_calc) <- c("Marcador", "Heterogenicidad")
-  
-  H_calc$Heterogenicidad <- round(as.double(H_calc$Heterogenicidad), 3)
-  
+  colnames(H_calc) <- c("Marcador", "Heterocigocidad")
+
+  H_calc$Heterocigocidad <- round(as.double(H_calc$Heterocigocidad), 3)
+
   # volver global
-  Heterogenicidad <<- H_calc
-  
+  Heterocigocidad <<- H_calc
+
   # guardar archivo de valores de PIC final
-  write_csv(Heterogenicidad,
-            paste(ruta, "Heterogenicidad.csv", sep = "")
-            )
-  
+  write_csv(Heterocigocidad,
+            paste(ruta, "Heterocigocidad.csv", sep = "")
+  )
+
   ######## obtener vector de columna de fracciones corregidas ##########
-  
+
   # crear vector de valores corregidos para todos los locus
   locs_df <- do.call("rbind", locs_lista)
-  
+
   # modificar nombres de filas
   rownames(locs_df) <- row.names(matriz)
-  
+
   # obtener vector de datos de frecuencias corregidas
   locs_vec <- locs_df$Corregida
-  
+
   # asignar nombres a locs_vec
   names(locs_vec) <- row.names(locs_df)
-  
+
   ####### crear componentes de matriz de frecuencias para calculo de pic ########
   # numero de genomas y especie
   myfreq_1 <- data.frame(row.names = especie,
                          Genomes = ncol(matriz) - 1)
-  
+
   # datos de frecuencia corregida para todos los locus
   myfreq_2 <- as.data.frame(locs_vec)
   myfreq_2 <- as.data.frame(t(myfreq_2))
-  
+
   # cambiar nomres de columnas _ por .
   nombres <- str_replace_all(names(myfreq_2), "_", ".")
   colnames(myfreq_2) <- nombres
-  
+
   # crear data frame de frecuencias
   myfreq <<- cbind(myfreq_1, myfreq_2)
-  
+
   # calcular el PIC
   PolyInfCont <- as.data.frame(
     round(
       PIC(myfreq, bypop = TRUE, overall = FALSE),
       3)
   )
-  
+
   # transponer
   PolyInfCont <- as.data.frame(t(PolyInfCont))
-  
+
   # agregar interpretacion
   PolyInfCont$Interpretacion <- case_when(
     PolyInfCont[, 1] < 0.3 ~ "No Informativo",
     PolyInfCont[, 1] > 0.3 & PolyInfCont[, 1] < 0.59 ~ "Moderadamente Informativo",
     PolyInfCont[, 1] > 0.60 ~ "Muy Informativo"
-    )
-  
+  )
+
   # agregar nombres de columnas
   colnames(PolyInfCont) <- c("PIC", "Interpretacion")
-  
+
   # volver nombres de filas en una columna
   PolyInfCont$Marcador <- row.names(PolyInfCont)
-  
+
   # reordenar columnas
   PolyInfCont <- PolyInfCont[,c("Marcador", "PIC", "Interpretacion")]
-  
+
   # volver global
-  PolyInfCont <<- PolyInfCont 
-  
+  PolyInfCont <<- PolyInfCont
+
   # guardar archivo de valores de PIC final
   write_csv(PolyInfCont,
             paste(ruta, "PIC.csv", sep = "")
   )
 
 }
-
