@@ -60,8 +60,6 @@ Dendro_PCA <- function(ruta, archivo, especie){
   get_eig(res.pca)
 
   # graficar aportaciones de los de los componentes principales
-  # (factoextra: version 1.0.7)
-
   tiff(paste(ruta,"PCA_aportaciones.tiff", sep = ""),
        res = 300,
        width = 2000,
@@ -109,9 +107,8 @@ Dendro_PCA <- function(ruta, archivo, especie){
         cex = 0.8,
         main = paste(especie, "binary / UPGMA"))
 
-
    # marcar grupos con P mayor a 0.9
-   pvrect(dendro, alpha = 0.90)
+   pvrect(dendro, alpha = 0.95)
 
    dev.off()
 
@@ -119,6 +116,7 @@ Dendro_PCA <- function(ruta, archivo, especie){
        width = 2000,
        height = 2000)
 
+  # grafica de correlacion
   corrplot(cor(matriz), type = "upper", method = "ellipse", tl.cex = 0.9)
 
   dev.off()
