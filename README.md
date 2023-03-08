@@ -8,7 +8,7 @@ Hace análisis por componentes principales y obtiene grafico de calidad de publi
 obtiene todas las combinaciones (80) y obtiene sus indices cofeneticos (IC).
 - A partir de las 4 mejores combinaciones, según el valor de IC, se contruye dendrogramas y obtiene graficos de calidad de publicacion.
 - Genera archivos formato en CSV de valores de PIC (con interpretacion) y H, para evaluar la calidad de los marcadores moleculares usados.
-- Genera un archivo formato CSV de valores cofenéticos para 80 combinaciones de matrices de distancia y
+- Genera un archivo formato CSV de valores cofenéticos para 80 combinaciones de matrices de distancia y metodos de agrupamiento
 
 ## metodos de agrupamiento usados
 - "ward.D",
@@ -33,3 +33,29 @@ obtiene todas las combinaciones (80) y obtiene sus indices cofeneticos (IC).
 - "GOWER & LEGENDRE S2"
 
 ## Ejemplo de archivo de entrada
+LOC	| IND1	 |IND2	| IND3 | IND4
+---------------------------
+LOC1_140	| 1	| 1	| 1	| 1
+LOC1_190				
+LOC1_250				1
+LOC1_300				
+LOC1_400				
+LOC1_450	1	1	1	
+LOC1_550	1	1		
+LOC1_750	1	1	1	1
+LOC1_950	1		1	
+LOC1_1500				
+LOC1_2000				1
+LOC2_360	1			1
+LOC2_400				
+LOC2_440				1
+LOC2_800	1		1	
+LOC3_225	1	1	1	
+LOC3_250	1	1	1	
+LOC3_275	1	1	1	
+LOC3_300	1	1	1	1
+LOC3_500				
+LOC4_150	1	1	1	1
+LOC4_225			1	
+LOC4_350	1	1	1	
+
