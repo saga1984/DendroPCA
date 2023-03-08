@@ -33,6 +33,7 @@ obtiene todas las combinaciones (80) y obtiene sus indices cofeneticos (IC).
 - "GOWER & LEGENDRE S2"
 
 ## Ejemplo de archivo de entrada
+### Matriz binaria (de presencia ausencia de bandas de PCR)
 LOC	| IND1	 |IND2	| IND3 | IND4 |
 ----|--------|------|------|------|
 LOC1_140	| 1	| 1	| 1	| 1 |
@@ -95,3 +96,6 @@ LOC11	| 0.836	| Muy Informativo |
 LOC12	| 0.705	| Muy Informativo |
 LOC13	| 0.64	| Muy Informativo |
 LOC14	| 0.752	| Muy Informativo |
+
+### Grafica Dendrograma con dos valores de p-value
+![Dendrograma](C:\Users\LIVERPOOL\Documents\2023\Vainilla_PCA_Dendro)
