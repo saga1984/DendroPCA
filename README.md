@@ -108,4 +108,4 @@ LOC14	| 0.752	| Muy Informativo |
 ![Best_Dendro](https://github.com/saga1984/DendroPCA/blob/main/Vainilla%20_%20SOKAL_%26_SNEATH_S5_average.jpeg)
 
 #### Horizontal
-[Best_Dendro](https://github.com/saga1984/DendroPCA/blob/main/Vainilla%20_%20SOKAL_%26_SNEATH_S5_average_horizontal.jpeg)
+![Best_Dendro](https://github.com/saga1984/DendroPCA/blob/main/Vainilla%20_%20SOKAL_%26_SNEATH_S5_average_horizontal.jpeg)
