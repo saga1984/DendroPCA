@@ -10,6 +10,26 @@ obtiene todas las combinaciones (80) y obtiene sus indices cofeneticos (IC).
 - Genera archivos formato en CSV de valores de PIC (con interpretacion) y H, para evaluar la calidad de los marcadores moleculares usados.
 - Genera un archivo formato CSV de valores cofenéticos para 80 combinaciones de matrices de distancia y
 
-# metodos de agrupamiento usados
+## metodos de agrupamiento usados
+- "ward.D",
+- "ward.D2",
+- "single",
+- "complete",
+- "average",
+- "mcquitty",
+- "median",
+- "centroid"
+
+## metodos de obtencion de matriz de distancia
+- "JACCARD S3"
+- "SOKAL & MICHENER S4"
+- "SOKAL & SNEATH S5"
+- "ROGERS & TANIMOTO S6"
+- "CZEKANOWSKI S7"
+- "GOWER & LEGENDRE S9"
+- "OCHIAI S12"
+- "SOKAL & SNEATH S13"
+- "Phi of PEARSON S14"
+- "GOWER & LEGENDRE S2"
 
 ## Ejemplo de archivo de entrada
