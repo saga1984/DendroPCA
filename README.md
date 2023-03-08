@@ -100,4 +100,12 @@ LOC14	| 0.752	| Muy Informativo |
 ### Grafica Dendrograma con dos valores de p-value
 ![Dendrograma](https://github.com/saga1984/DendroPCA/blob/main/Dendrograma.jpeg)
 
+### Analisis por Componentes Principales
 ![PCA](https://github.com/saga1984/DendroPCA/blob/main/PCA.jpeg)
+
+### Mejor dendrograma con validacion de clusters (numero optimo de clusters y valor mas alto de indice cofenetico)
+#### Vertical
+![Best_Dendro](https://github.com/saga1984/DendroPCA/blob/main/Vainilla%20_%20SOKAL_%26_SNEATH_S5_average.jpeg)
+
+#### Horizontal
+[Best_Dendro](https://github.com/saga1984/DendroPCA/blob/main/Vainilla%20_%20SOKAL_%26_SNEATH_S5_average_horizontal.jpeg)
