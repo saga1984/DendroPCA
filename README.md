@@ -100,3 +100,4 @@ LOC14	| 0.752	| Muy Informativo |
 ### Grafica Dendrograma con dos valores de p-value
 ![Dendrograma](https://github.com/saga1984/DendroPCA/blob/main/Dendrograma.jpeg)
 
+![PCA](https://github.com/saga1984/DendroPCA/blob/main/PCA.jpeg)
