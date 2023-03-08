@@ -36,7 +36,7 @@ obtiene todas las combinaciones (80) y obtiene sus indices cofeneticos (IC).
 LOC	| IND1	 |IND2	| IND3 | IND4 |
 ----|--------|------|------|------|
 LOC1_140	| 1	| 1	| 1	| 1 |
-----------|---|---|---|---|
+|-------------------------|
 LOC1_190	| 0 | 0 | 0 | 0 |
 ----------|---|---|---|---|
 LOC1_250	|	0 |	1 | 0 | 0 |
