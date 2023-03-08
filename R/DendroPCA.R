@@ -2,23 +2,23 @@
 #' hace agrupamiento jerarquico y analisis de componentes principales
 #'
 #'@description carga el archivo de excel (matriz binaria) y realiza lo siguiente
-#' hace analisis por componentes principales y obtiene grafico de calidad de publicacion.
+#'hace analisis por componentes principales y obtiene grafico de calidad de publicacion.
 #'
-#' hace dendrograma con soporte estadistico y obtiene grafico de calidad de publicacion.
+#'hace dendrograma con soporte estadistico y obtiene grafico de calidad de publicacion.
 #'
-#' hace matriz de correlación (Pearson) ordenada por agrupamiento jerarquico
+#'hace matriz de correlación (Pearson) ordenada por agrupamiento jerarquico
 #'
-#' a partir de todos (10) los metodos de ade4 para obtener matrices de distancia
-#' y a partir de todos (8) los metodos de agrupamiento jerarquico
-#' obtiene todas las combinaciones y obtiene sus indices cofeneticos
-#' para evaluar los mejores.
+#'a partir de todos (10) los metodos de ade4 para obtener matrices de distancia
+#'y a partir de todos (8) los metodos de agrupamiento jerarquico
+#'obtiene todas las combinaciones y obtiene sus indices cofeneticos
+#'para evaluar los mejores.
 #'
-#' contruye dendrogramas para las 4 mejores combinaciones y obtiene grafico de calidad de publicacion.
+#'contruye dendrogramas para las 4 mejores combinaciones y obtiene grafico de calidad de publicacion.
 #'
-#' archivos formato CSV de valores de PIC (con interpretacion) y H
+#'archivos formato CSV de valores de PIC (con interpretacion) y H
 #'
-#' archivo formato CSV de valores cofeneticos para 80 combinaciones de matrices de distancia y
-#' metodos de agrupaiento
+#'archivo formato CSV de valores cofeneticos para 80 combinaciones de matrices de distancia y
+#'metodos de agrupaiento
 #'
 #'@param ruta es la ruta del archivo de entrada (matriz binaria)
 #'@param archivo archivo de entrada (matriz binaria)
@@ -26,7 +26,7 @@
 #'@param especie especie de interes de donde vienen los datos
 #'
 #'@return imagenes de calidad de publicacion de PCA y dendrogramas
-#' calculos de PIC y H y lista de indices cofeneticos
+#'calculos de PIC y H y lista de indices cofeneticos
 #'@export
 
 Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie){
@@ -146,24 +146,6 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie){
                      title = paste("PCA individuales /", especie))
   )
   dev.off()
-
-  ####### dendograma con bootstrap, 1000, paquete pvclust, version 2.2-0 ########
-  dendro <- pvclust(matriz,
-                    method.hclust = "average", # UPGMA
-                    method.dist = "binary",
-                    nboot = 1000,
-                    iseed = TRUE)
-
-  # visualizar el dendograma con titulo, entre otras
-  tiff(paste(ruta, "Dendrograma.tiff", sep = ""), res = 300,
-       width = 2000,
-       height = 2000)
-
-  plot(dendro,
-       hang = -2,
-       cex = 0.8,
-       main = paste(especie, "binary / UPGMA"))
-
 
   # marcar grupos con P mayor a 0.95
   pvrect(dendro, alpha = 0.95)
@@ -356,6 +338,23 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie){
            tl.cex = 0.9)
   dev.off()
 
+  ####### dendograma con bootstrap, 1000, paquete pvclust, version 2.2-0 ########
+  dendro <- pvclust(matriz,
+                    method.hclust = metodo_hclust,
+                    method.dist = "binary",
+                    nboot = 1000,
+                    iseed = TRUE)
+
+  # visualizar el dendograma con titulo, entre otras
+  tiff(paste(ruta, "Dendrograma.tiff", sep = ""), res = 300,
+       width = 2000,
+       height = 2000)
+
+  plot(dendro,
+       hang = -2,
+       cex = 0.8,
+       main = paste(especie, "binary / UPGMA"))
+  
   # vector con los nombres de las mejores combinaciones dist-clust
   mejores <- indices_cofeneticos[1:4, 1]
 
