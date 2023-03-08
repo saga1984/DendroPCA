@@ -10,6 +10,8 @@ obtiene todas las combinaciones (80) y obtiene sus indices cofeneticos (IC).
 - Genera archivos formato en CSV de valores de PIC (con interpretacion) y H, para evaluar la calidad de los marcadores moleculares usados.
 - Genera un archivo formato CSV de valores cofenéticos para 80 combinaciones de matrices de distancia y metodos de agrupamiento
 
+NOTA: Las gráficas se generan por defecto en formato jpeg pero se puede elegir entre tiff, bmp, png y jpeg
+
 ## metodos de agrupamiento usados
 - "ward.D",
 - "ward.D2",
@@ -102,6 +104,8 @@ LOC14	| 0.752	| Muy Informativo |
 
 ### Analisis por Componentes Principales
 ![PCA](https://github.com/saga1984/DendroPCA/blob/main/PCA.jpeg)
+
+Ademas se crean imagenes de apoyo al analisis de PCA como: PCA aportaciones, contibuciones totales de var e ind cos2 de var e ind
 
 ### Mejor dendrograma con validacion de clusters (numero optimo de clusters y valor mas alto de indice cofenetico)
 #### Vertical
