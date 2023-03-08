@@ -60,6 +60,7 @@ LOC4_225	| 0 |	1 | 0 | 0 |
 LOC4_350	| 1 | 1	| 1 | 0 |
 
 ## Archivos de salida
+### Heterogenicidad
 Marcador |	Heterogenicidad |
 ---------|------------------|
 LOC1	| 0.85 |
@@ -77,6 +78,7 @@ LOC12	| 0.749 |
 LOC13	| 0.685 |
 LOC14	| 0.786 |
 
+### PIC (Contenido de Informacion Polimorfica)
 Marcador	| PIC |	Interpretacion |
 ----------|-----|----------------|
 LOC1	| 0.833	| Muy Informativo |
