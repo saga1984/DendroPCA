@@ -76,3 +76,20 @@ LOC11	| 0.852 |
 LOC12	| 0.749 |
 LOC13	| 0.685 |
 LOC14	| 0.786 |
+
+Marcador	| PIC |	Interpretacion |
+----------|-----|----------------|
+LOC1	| 0.833	| Muy Informativo |
+LOC2	| 0.551	| Moderadamente Informativo |
+LOC3	| 0.679	| Muy Informativo |
+LOC4	| 0.729	| Muy Informativo |
+LOC5	| 0.638	| Muy Informativo |
+LOC6	| 0.741	| Muy Informativo |
+LOC7	| 0.767	| Muy Informativo |
+LOC8	| 0.854	| Muy Informativo |
+LOC9	| 0.164	| No Informativo |
+LOC10	| 0.374	| Moderadamente Informativo |
+LOC11	| 0.836	| Muy Informativo |
+LOC12	| 0.705	| Muy Informativo |
+LOC13	| 0.64	| Muy Informativo |
+LOC14	| 0.752	| Muy Informativo |
