@@ -6,6 +6,8 @@
 #'
 #' hace dendrograma con soporte estadistico y obtiene grafico de calidad de publicacion.
 #'
+#' hace matriz de correlación (Pearson) ordenada por agrupamiento jerarquico
+#'
 #' a partir de todos (10) los metodos de ade4 para obtener matrices de distancia
 #' y a partir de todos (8) los metodos de agrupamiento jerarquico
 #' obtiene todas las combinaciones y obtiene sus indices cofeneticos
@@ -20,13 +22,14 @@
 #'
 #'@param ruta es la ruta del archivo de entrada (matriz binaria)
 #'@param archivo archivo de entrada (matriz binaria)
+#'@param nombres_ind vector de nombres de individuos (igual al numero de columnas de matriz binaria) 
 #'@param especie especie de interes de donde vienen los datos
 #'
 #'@return imagenes de calidad de publicacion de PCA y dendrogramas
 #' calculos de PIC y H y lista de indices cofeneticos
 #'@export
 
-Dendro_y_PCA <- function(ruta, archivo, especie){
+Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie){
 
   # importar hoja de excel
   matriz <- read_xlsx(
@@ -45,6 +48,9 @@ Dendro_y_PCA <- function(ruta, archivo, especie){
 
   # convertir NAs en 0
   matriz[is.na(matriz)] <- 0
+
+  # asignar nombres de filas y columnas
+  colnames(matriz) <- nombres_ind
 
   # transponer (columnas a filas y filas a columnas)
   Matriz <- as.data.frame(t(matriz))
@@ -161,13 +167,6 @@ Dendro_y_PCA <- function(ruta, archivo, especie){
 
   # marcar grupos con P mayor a 0.95
   pvrect(dendro, alpha = 0.95)
-  dev.off()
-
-  tiff(paste(ruta, "Correlacion.tiff", sep = ""), res = 300,
-       width = 2000,
-       height = 2000)
-
-  corrplot(cor(matriz), type = "upper", method = "ellipse", tl.cex = 0.9)
   dev.off()
 
   #######  indices de distancia para datos binarios paquete: adegenet #######
@@ -334,6 +333,29 @@ Dendro_y_PCA <- function(ruta, archivo, especie){
             paste(ruta,"indices_cofeneticos.csv", sep = "")
   )
 
+
+  # obtener en vector la mejor combinacion segun ind cofenetico
+  metodo_hclust <- unlist(str_split(
+    string = indices_cofeneticos[1,1],
+    pattern = "_"))
+
+  # obtener el mejor metodo de aglomeracion
+  metodo_hclust <- metodo_hclust[length(metodo_hclust)]
+
+  # graficar y guardar correlacion
+  tiff(paste(ruta, "Correlacion.tiff", sep = ""),
+       res = 300,
+       width = 2000,
+       height = 2000)
+
+  corrplot(cor(matriz),
+           type = "upper",
+           method = "ellipse",
+           order = "hclust",
+           hclust.method = metodo_hclust,
+           tl.cex = 0.9)
+  dev.off()
+
   # vector con los nombres de las mejores combinaciones dist-clust
   mejores <- indices_cofeneticos[1:4, 1]
 
@@ -371,7 +393,7 @@ Dendro_y_PCA <- function(ruta, archivo, especie){
             distance = "binary",
             min.nc=2,
             max.nc=17,
-            method = "average",
+            method = metodo_hclust,
             index = "all")
   )
 
@@ -398,9 +420,9 @@ Dendro_y_PCA <- function(ruta, archivo, especie){
 
     # visualizacion  mas común en rectangulos
     tiff(paste(ruta, paste(especie, "_", names(mejores_agrupamientos)[i]), ".tiff", sep = ""),
-         res = 300,
-         width = 2000,
-         height = 2000)
+         res = 350,
+         width = 2500,
+         height = 2500)
 
     print(fviz_dend(
       Best_dendros[[i]],
@@ -415,11 +437,11 @@ Dendro_y_PCA <- function(ruta, archivo, especie){
     )
     dev.off()
 
-    # visualizacion  mas común en rectangulos
+    # visualizacion  mas común en rectangulos, horizontales
     tiff(paste(ruta, paste(especie, "_",names(mejores_agrupamientos)[i]), "_horizontal.tiff", sep = ""),
-         res = 300,
-         width = 2000,
-         height = 2000)
+         res = 350,
+         width = 2500,
+         height = 2500)
 
     print(fviz_dend(
       Best_dendros[[i]],
@@ -437,7 +459,6 @@ Dendro_y_PCA <- function(ruta, archivo, especie){
     dev.off()
 
   }
-
 
   ######## calculo de Heterocigocidad de forma manual y del PIC usando polysat ########
 
