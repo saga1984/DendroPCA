@@ -99,6 +99,61 @@ LOC12	| 0.705	| Muy Informativo |
 LOC13	| 0.64	| Muy Informativo |
 LOC14	| 0.752	| Muy Informativo |
 
+### Valores cofenéticos (80 combinaciones)
+Combinacion_distancia_agrupamiento	| Valor_IndiceCofenetico |
+------------------------------------|------------------------|
+SOKAL_&_SNEATH_S5_average	| 0.97506046 |
+SOKAL_&_SNEATH_S5_mcquitty | 0.97256937 |
+JACCARD_S3_average | 0.97249395 |
+JACCARD_S3_mcquitty	| 0.96979511 |
+OCHIAI_S12_average | 0.96667575 |
+CZEKANOWSKI_S7_average | 0.96660277 |
+SOKAL_&_SNEATH_S13_average | 0.96585971 |
+OCHIAI_S12_mcquitty |	0.96383021 |
+CZEKANOWSKI_S7_mcquitty |	0.96379487 |
+SOKAL_&_SNEATH_S13_mcquitty |	0.96239853 |
+SOKAL_&_SNEATH_S5_complete | 0.96218411 |
+SOKAL_&_SNEATH_S5_single | 0.95968778 |
+JACCARD_S3_complete	| 0.95925127 |
+ROGERS_&_TANIMOTO_S6_average | 0.95811248 |
+SOKAL_&_SNEATH_S13_complete	| 0.95793838 |
+Phi_of_PEARSON_S14_average | 0.95752927 |
+JACCARD_S3_single |	0.95422703 |
+ROGERS_&_TANIMOTO_S6_mcquitty |	0.95398313 |
+Phi_of_PEARSON_S14_mcquitty |	0.95365089 |
+OCHIAI_S12_complete |	0.95154922 |
+CZEKANOWSKI_S7_complete |	0.95136198 |
+Phi_of_PEARSON_S14_complete |	0.94963859 |
+GOWER_&_LEGENDRE_S9_average |	0.94949019 |
+SOKAL_&_MICHENER_S4_average |	0.94949019 |
+GOWER_&_LEGENDRE_S2_average |	0.94654587 |
+GOWER_&_LEGENDRE_S9_mcquitty | 0.94499696 |
+SOKAL_&_MICHENER_S4_mcquitty | 0.94499696 |
+CZEKANOWSKI_S7_single	| 0.94347506 |
+GOWER_&_LEGENDRE_S2_mcquitty | 0.94164209 |
+OCHIAI_S12_single	| 0.94088355 |
+SOKAL_&_SNEATH_S13_single	| 0.93844002 |
+ROGERS_&_TANIMOTO_S6_single	| 0.93425771 |
+GOWER_&_LEGENDRE_S2_complete |	0.93283138 |
+ROGERS_&_TANIMOTO_S6_complete |	0.92558376 |
+Phi_of_PEARSON_S14_single |	0.92199232 |
+GOWER_&_LEGENDRE_S9_single | 0.92062597 |
+SOKAL_&_MICHENER_S4_single | 0.92062597 |
+GOWER_&_LEGENDRE_S9_complete	| 0.91467212 |
+SOKAL_&_MICHENER_S4_complete	| 0.91467212 |
+SOKAL_&_SNEATH_S13_centroid	| 0.9068372 |
+CZEKANOWSKI_S7_centroid	| 0.9067725 |
+OCHIAI_S12_centroid	| 0.90535203 |
+JACCARD_S3_centroid	| 0.90466649 |
+GOWER_&_LEGENDRE_S2_single	| 0.90402015 |
+ROGERS_&_TANIMOTO_S6_centroid	| 0.90364496 |
+GOWER_&_LEGENDRE_S9_centroid |	0.90359864 |
+SOKAL_&_MICHENER_S4_centroid |	0.90359864 |
+Phi_of_PEARSON_S14_centroid	| 0.90349181 |
+SOKAL_&_SNEATH_S5_centroid	| 0.87441902 |
+
+
+
 ### Grafica Dendrograma con dos valores de p-value
 ![Dendrograma](https://github.com/saga1984/DendroPCA/blob/main/Dendrograma.jpeg)
 
