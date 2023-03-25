@@ -32,6 +32,7 @@
 
 Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg){
   
+  
   # importar hoja de excel
   matriz <- read_xlsx(
     path = paste(ruta, archivo, sep = ""),
@@ -68,63 +69,63 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
   
   # cos2 total de variables en Dim.1 and Dim.2
   formato_img(paste(ruta,"Total_cos2_var.", as.character(substitute(formato_img)), sep = ""),
-       res = 350,
-       width = 3000,
-       height = 2500)
+              res = 350,
+              width = 3000,
+              height = 2500)
   
   print(fviz_cos2(res.pca, choice = "var", axes = 1:2, xtickslab.rt = 90))
   dev.off()
   
   # cos2 total de individuos en Dim.1 and Dim.2
   formato_img(paste(ruta,"Total_cos2_ind.", as.character(substitute(formato_img)), sep = ""),
-       res = 300,
-       width = 2000,
-       height = 2000)
+              res = 300,
+              width = 2000,
+              height = 2000)
   
   print(fviz_cos2(res.pca, choice = "ind", axes = 1:2, xtickslab.rt = 90))
   dev.off()
   
   # contribuciones total de variables en Dim.1 and Dim.2
   formato_img(paste(ruta,"Total_contrib_var.", as.character(substitute(formato_img)), sep = ""),
-       res = 350,
-       width = 3000,
-       height = 2500)
+              res = 350,
+              width = 3000,
+              height = 2500)
   
   print(fviz_contrib(res.pca, choice = "var", axes = 1:2, xtickslab.rt = 90))
   dev.off()
   
   # cos2 total de individuos en Dim.1 and Dim.2
   formato_img(paste(ruta,"Total_contrib_ind.", as.character(substitute(formato_img)), sep = ""),
-       res = 300,
-       width = 2000,
-       height = 2000)
+              res = 300,
+              width = 2000,
+              height = 2000)
   
   print(fviz_contrib(res.pca, choice = "ind", axes = 1:2, xtickslab.rt = 90))
   dev.off()
   
   # cos2 de individuos en todas las dimensiones
   formato_img(paste(ruta,"Cos2_ind.", as.character(substitute(formato_img)), sep = ""),
-       res = 300,
-       width = 2000,
-       height = 2000)
+              res = 300,
+              width = 2000,
+              height = 2000)
   
   corrplot(res.pca$ind$cos2, is.corr = FALSE)
   dev.off()
   
   # contribuciones de individuos en todas las dimensiones
   formato_img(paste(ruta,"Contrib_ind.", as.character(substitute(formato_img)), sep = ""),
-       res = 300,
-       width = 2000,
-       height = 2000)
+              res = 300,
+              width = 2000,
+              height = 2000)
   
   corrplot(res.pca$ind$contrib, is.corr = FALSE)
   dev.off()
   
   # graficar aportaciones de los de los componentes principales
   formato_img(paste(ruta,"PCA_aportaciones.", as.character(substitute(formato_img)), sep = ""),
-       res = 300,
-       width = 2000,
-       height = 2000)
+              res = 300,
+              width = 2000,
+              height = 2000)
   
   print(fviz_screeplot(res.pca,
                        addlabels = TRUE,
@@ -136,9 +137,9 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
   # cos2 = the quality of the individuals on the factor map
   
   formato_img(paste(ruta,"PCA.", as.character(substitute(formato_img)), sep = ""),
-       res = 300,
-       width = 2000,
-       height = 2000)
+              res = 300,
+              width = 2000,
+              height = 2000)
   
   print(fviz_pca_ind(res.pca,
                      col.ind = "cos2",
@@ -323,9 +324,9 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
   
   # graficar y guardar correlacion
   formato_img(paste(ruta, "Correlacion.", as.character(substitute(formato_img)), sep = ""),
-       res = 300,
-       width = 2000,
-       height = 2000)
+              res = 300,
+              width = 2000,
+              height = 2000)
   
   corrplot(cor(matriz),
            type = "upper",
@@ -344,13 +345,13 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
   
   # visualizar el dendograma con titulo, entre otras
   formato_img(paste(ruta, "Dendrograma.", as.character(substitute(formato_img)), sep = ""), res = 300,
-       width = 2000,
-       height = 2000)
+              width = 2000,
+              height = 2000)
   
   plot(dendro,
        hang = -2,
        cex = 0.8,
-       main = paste(especie, "binary / UPGMA"))
+       main = paste(especie, "binario / UPGMA"))
   
   # marcar grupos con P mayor a 0.95
   pvrect(dendro, alpha = 0.95)
@@ -425,9 +426,9 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
                       ".", 
                       as.character(substitute(formato_img)),
                       sep = ""),
-         res = 350,
-         width = 2500,
-         height = 2500)
+                res = 350,
+                width = 2500,
+                height = 2500)
     
     print(fviz_dend(
       Best_dendros[[i]],
@@ -436,7 +437,7 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
       color_labels_by_k = FALSE,
       type = "rectangle",
       main = paste(especie,"/",
-                   str_replace_all(names(mejores_agrupamientos)[i], "_", " ")
+                   str_replace_all(str_replace(names(mejores_agrupamientos)[i], "average", "UPGMA"), "_", " ")
       )
     )
     )
@@ -447,9 +448,9 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
                       "_horizontal.", 
                       as.character(substitute(formato_img)), 
                       sep = ""),
-         res = 350,
-         width = 2500,
-         height = 2500)
+                res = 350,
+                width = 2500,
+                height = 2500)
     
     print(fviz_dend(
       Best_dendros[[i]],
@@ -460,7 +461,7 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
       color_labels_by_k = FALSE,
       type = "rectangle",
       main = paste(especie, "/",
-                   str_replace_all(names(mejores_agrupamientos)[i], "_", " ")
+                   str_replace_all(str_replace(names(mejores_agrupamientos)[1], "average", "UPGMA"), "_", " ")
       )
     )
     )
@@ -611,3 +612,4 @@ Dendro_y_PCA <- function(ruta, archivo, nombres_ind, especie, formato_img = jpeg
   )
   
 }
+
