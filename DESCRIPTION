@@ -17,6 +17,7 @@ License: GPL-3
 Imports: 
     readxl,
     factoextra,
+    FactoMineR,
     pvclust,
     corrplot,
     ade4,
